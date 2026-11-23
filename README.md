@@ -167,6 +167,6 @@ claude plugin install axiom-coach-lite@deploy-axiom
 
 This repository holds only the catalog: `.claude-plugin/marketplace.json`, which lists each plugin from its own repository (a `git-subdir` source), and the catalog page in `docs/`. The plugins live in their own repositories. To regenerate the generated files after editing `data/plugins.json`, run `python3 scripts/build.py`.
 
-Fonts in `docs/fonts` are Geist and IBM Plex Mono, both SIL Open Font License; the licenses sit beside them.
+Fonts in `docs/fonts` are Cinzel, Geist and IBM Plex Mono, all SIL Open Font License; the licenses sit beside them. The page itself is `docs/index.html` with `docs/assets/` (plain CSS and JavaScript, no external requests).
 
 Deploy Axiom · deployaxiom.com · MIT licensed
