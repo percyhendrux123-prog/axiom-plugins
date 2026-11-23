@@ -1,0 +1,81 @@
+{
+  "marketplace": "deploy-axiom",
+  "catalog_repo": "percyhendrux123-prog/axiom-plugins",
+  "groups": [
+    {"id": "owner-controls", "title": "Owner controls", "plugins": ["axiom-gatekeeper", "axiom-standing", "axiom-tripwire", "axiom-run-receipts", "axiom-declines"]},
+    {"id": "working-style", "title": "Working style", "plugins": ["axiom-axioma", "axiom-chiron", "axiom-agent"]},
+    {"id": "fitness", "title": "Fitness", "plugins": ["axiom-coach", "axiom-coach-lite"]}
+  ],
+  "plugins": {
+    "axiom-gatekeeper": {
+      "display": "Gatekeeper", "repo": "hermes-gatekeeper", "folder": "gatekeeper", "icon": "gatekeeper.png",
+      "mechanism": "hook", "directory": false,
+      "blurb": "Checks outbound messaging calls against your own rules (STOP, consent, quiet hours, no double-texting, approved wording) before they run, and holds or denies the call when a check fails.",
+      "entry_description": "Checks outbound messaging tool calls against your own rules before they run, and holds or denies the call when a check fails.",
+      "tags": ["messaging", "consent", "hooks"]
+    },
+    "axiom-standing": {
+      "display": "Standing", "repo": "hermes-standing", "folder": "standing", "icon": "standing.png",
+      "mechanism": "mod", "directory": false,
+      "blurb": "Keeps a local record of checks that passed or failed, refuses to mark a task done until a check passes, and asks for approval when an agent acts above its level.",
+      "entry_description": "Earned trust for agent workers: independent proof checks, a local record, and level-based approval gates.",
+      "tags": ["trust", "approvals", "mod"]
+    },
+    "axiom-tripwire": {
+      "display": "Tripwire", "repo": "hermes-tripwire", "folder": "tripwire", "icon": "tripwire.png",
+      "mechanism": "hook + mod", "directory": false,
+      "blurb": "Writes one private log line each time Claude Code refuses a tool call. It only observes: it never blocks, approves or changes a call.",
+      "entry_description": "Writes one private log line each time Claude Code refuses a tool call. Observes only; never blocks or approves.",
+      "tags": ["audit", "refusals", "mod", "hooks"]
+    },
+    "axiom-run-receipts": {
+      "display": "Run Receipts", "repo": "hermes-run-receipts", "folder": "run-receipts", "icon": "run-receipts.png",
+      "mechanism": "hook", "directory": false,
+      "blurb": "Writes one private receipt per session or headless run: when it ran, how many tool calls were seen, how many were reported as failed, and how the run ended.",
+      "entry_description": "Writes one private receipt per Claude Code session or headless run: outcome and tool counts, never arguments, results or text.",
+      "tags": ["audit", "receipts", "hooks"]
+    },
+    "axiom-declines": {
+      "display": "Declines", "repo": "hermes-declines", "folder": "declines", "icon": "declines.png",
+      "mechanism": "mod", "directory": false,
+      "blurb": "Remembers a permission request you declined and stops Claude Code asking for the same thing again.",
+      "entry_description": "Remembers a permission request you declined and stops Claude Code asking for the same thing again.",
+      "tags": ["permissions", "approvals", "mod"]
+    },
+    "axiom-axioma": {
+      "display": "Axioma", "repo": "hermes-axioma", "folder": "axioma", "icon": "axioma.png",
+      "mechanism": "mod", "directory": false,
+      "blurb": "Colors the few phrases in Claude's reply that deserve a second look, and shows an advisory card before a send, spend, spin or scrub call. Advice only, never consent.",
+      "entry_description": "Colors the few phrases in Claude's reply that deserve a second look, and shows an advisory card before a send, spend, spin or scrub call. Advice only, never consent.",
+      "tags": ["advisory", "signals", "mod"]
+    },
+    "axiom-chiron": {
+      "display": "Chiron", "repo": "hermes-chiron", "folder": "chiron", "icon": "chiron.png",
+      "mechanism": "hook", "directory": false,
+      "blurb": "Reads how much you know about a topic from your own words, with no model call, and adds one short note per turn telling Claude how to talk to you. Off until you turn it on.",
+      "entry_description": "Reads your level on each topic from your own words, with no model call, and tells Claude how to talk to you.",
+      "tags": ["advisor", "beginners", "hooks"]
+    },
+    "axiom-agent": {
+      "display": "Axiom Agent", "repo": "hermes-axiom-agent", "folder": "axiom-agent", "icon": "axiom-agent.png",
+      "mechanism": "skill", "directory": false,
+      "blurb": "The nine-article Axiom Doctrine as two skills, plus a status report of which articles have an enabled enforcer plugin. It enforces nothing itself.",
+      "entry_description": "The nine-article Axiom Doctrine as skills, with a status report of which articles have an enabled enforcer plugin. Enforces nothing itself.",
+      "tags": ["doctrine", "rules", "skills"]
+    },
+    "axiom-coach": {
+      "display": "Axiom Coach", "repo": "hermes-axiom-coach", "folder": "coach", "icon": "coach.png",
+      "mechanism": "skill", "directory": true,
+      "blurb": "Skills for working a coach's desk and a self-serve plan through the open coach app's own connector, plus the three Lite calculators as written rules.",
+      "entry_description": "Skills for the open coach app's connector (coach desk, self-serve plan, connect, deploy) and the Lite calculators as written rules. Skills only.",
+      "tags": ["coaching", "fitness", "skills"]
+    },
+    "axiom-coach-lite": {
+      "display": "Axiom Coach Lite Tools", "repo": "hermes-axiom-coach", "folder": "lite", "icon": "lite.png",
+      "mechanism": "mod", "directory": false,
+      "blurb": "Three local calculators: a training split, daily macro targets (five health questions first), and a cardio calorie estimate. No network, no files.",
+      "entry_description": "The three Lite calculators (split, macros, cardio) as local tools for Claude Code, run as a mod. No network, no files.",
+      "tags": ["fitness", "calculators", "mod"]
+    }
+  }
+}

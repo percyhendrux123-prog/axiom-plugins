@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Axiom Office for Claude · Deploy Axiom</title>
+<meta name="description" content="Axiom Office for Claude: One orchestrator, a team of specialists you can see but not talk past, and your rules enforced as code. In build. Built from ten Claude Code plugins that install from GitHub.">
+<meta name="theme-color" content="#121316">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Deploy Axiom">
+<meta property="og:title" content="Axiom Office for Claude · Deploy Axiom">
+<meta property="og:description" content="Axiom Office for Claude: One orchestrator, a team of specialists you can see but not talk past, and your rules enforced as code. In build. Built from ten Claude Code plugins that install from GitHub.">
+<meta property="og:image" content="https://percyhendrux123-prog.github.io/axiom-plugins/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Axiom Office for Claude, in build, with the Deploy Axiom mark.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="mark.svg">
+<link rel="preload" href="fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:Geist;src:url(fonts/geist-latin-wght-normal.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url(fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url(fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+:root{--ink:#121316;--panel:#17181B;--rule:#2C2D31;--dim:#96928A;--mid:#CDC8BD;--text:#DEDAD1;--stone:#F2EEE6;--brass:#8C7350;
+--sans:Geist,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+--mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+--gut:clamp(20px,5vw,56px)}
+*{box-sizing:border-box}
+html{background:var(--ink);color-scheme:dark;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ink);color:var(--text);font:400 1rem/1.6 var(--sans);overflow-wrap:break-word}
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--gut)}
+a{color:var(--stone);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--stone);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--stone);color:var(--ink);padding:10px 14px;z-index:9}
+.skip:focus{left:8px}
+.bar{border-bottom:1px solid var(--rule)}
+.bar .wrap{display:flex;align-items:center;gap:10px;min-height:56px}
+.bar img{width:22px;height:20px;display:block}
+.bar span{font-weight:600;color:var(--stone);letter-spacing:-.01em}
+.bar .sub{margin-left:auto;font:400 .75rem/1 var(--mono);color:var(--dim);text-transform:uppercase;letter-spacing:.08em}
+.label{font:500 .75rem/1.4 var(--mono);color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin:0 0 14px}
+.label::before{content:"";display:inline-block;width:18px;height:1px;background:var(--brass);vertical-align:middle;margin-right:10px}
+h1,h2,h3{font-family:var(--sans);color:var(--stone);margin:0}
+h1{font-weight:640;font-size:clamp(2.1rem,6.4vw,3.6rem);line-height:1.06;letter-spacing:-.035em}
+h2{font-weight:640;font-size:clamp(1.5rem,3.6vw,2.1rem);line-height:1.15;letter-spacing:-.03em}
+h3{font-weight:600;font-size:1.125rem;line-height:1.25;letter-spacing:-.01em}
+.hero .wrap{position:relative}
+.hero .big{display:none}
+@media (min-width:900px){.hero .big{display:block;position:absolute;right:var(--gut);top:0;width:120px;height:auto}}
+.hero{padding:clamp(40px,8vw,88px) 0 clamp(36px,6vw,64px);border-bottom:1px solid var(--rule)}
+.hero .state{display:inline-block;font:500 .75rem/1 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--stone);border:1px solid var(--rule);border-left:3px solid var(--brass);padding:8px 12px;margin:0 0 22px}
+.lede{font-size:clamp(1.125rem,2.4vw,1.4rem);line-height:1.45;color:var(--mid);max-width:36em;margin:20px 0 0}
+.three{list-style:none;margin:28px 0 0;padding:0;max-width:44em;border-top:1px solid var(--rule)}
+.three li{padding:14px 0;border-bottom:1px solid var(--rule);color:var(--text)}
+.actions{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;margin-top:30px}
+.btn{display:inline-flex;align-items:center;min-height:48px;padding:0 22px;background:var(--stone);color:var(--ink);font:500 1rem/1 var(--sans);text-decoration:none;border:1px solid var(--stone)}
+.btn:hover{background:#fff}
+.note{font-size:.875rem;color:var(--dim);margin:0}
+section.block{padding:clamp(36px,6vw,64px) 0 0}
+.intro{color:var(--mid);max-width:40em;margin:12px 0 0}
+.install{margin:24px 0 0;border:1px solid var(--rule);background:var(--panel);padding:16px 18px}
+.install p{margin:0 0 10px;font-size:.9375rem;color:var(--mid)}
+code,pre{font-family:var(--mono)}
+pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+pre code{font-size:.875rem;line-height:1.55;color:var(--stone);user-select:all;-webkit-user-select:all}
+.legend{display:grid;gap:10px;margin:22px 0 0;padding:0;list-style:none;font-size:.9375rem;color:var(--mid)}
+.legend li{display:flex;gap:12px;align-items:baseline}
+.tag{display:inline-block;font:500 .75rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--stone);border:1px solid var(--rule);border-left:3px solid var(--brass);padding:6px 9px;white-space:nowrap}
+.group{padding-top:clamp(32px,5vw,52px)}
+.group h2{font-size:clamp(1.3rem,3vw,1.7rem);padding-top:16px;border-top:1px solid var(--brass)}
+.grid{display:grid;gap:16px;margin-top:22px;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))}
+.card{background:var(--panel);border:1px solid var(--rule);padding:20px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.card header{display:flex;gap:14px;align-items:center}
+.card img{width:56px;height:56px;flex:none;display:block;border:1px solid var(--rule)}
+.card .id{margin:2px 0 0;font:400 .8125rem/1.3 var(--mono);color:var(--dim)}
+.card p{margin:0}
+.card .blurb{color:var(--text);flex:1}
+.meta{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:0;padding:0;list-style:none;font-size:.875rem;color:var(--mid)}
+.card pre{background:var(--ink);border:1px solid var(--rule);padding:12px 14px}
+.card .hermes{font-size:.875rem;color:var(--dim)}
+.links{display:flex;flex-wrap:wrap;gap:0 20px;margin-top:auto !important}
+.links a{display:inline-flex;align-items:center;min-height:44px;font-size:.9375rem}
+.fine{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:8px;color:var(--dim);font-size:.9375rem;max-width:46em}
+footer{margin-top:clamp(44px,7vw,80px);border-top:1px solid var(--rule);padding:28px 0 40px;font:400 .8125rem/1.6 var(--mono);color:var(--dim)}
+footer a{color:var(--mid)}
+@media (max-width:520px){.legend li{flex-direction:column;gap:6px}.bar .sub{display:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="bar"><div class="wrap"><img src="mark.svg" alt="" width="22" height="20"><span>Deploy Axiom</span><span class="sub">Plugins for Claude Code and Hermes Agent</span></div></div>
+<main id="main">
+  <div class="hero"><div class="wrap">
+    <img class="big" src="mark.svg" alt="" width="120" height="110">
+    <p class="state">In build. Not released yet.</p>
+    <h1>Axiom Office for Claude</h1>
+    <p class="lede">One orchestrator, a team of specialists you can see but not talk past, and your rules enforced as code.</p>
+    <ul class="three">
+        <li>Discovery decides the team.</li>
+        <li>One front door: you talk only to the orchestrator, which alone holds sensitive data.</li>
+        <li>Every send, refusal and run leaves a receipt.</li>
+    </ul>
+    <div class="actions">
+      <a class="btn" href="https://deployaxiom.com">Talk to Deploy Axiom</a>
+      <p class="note">The Office is in build. The parts below are released.</p>
+    </div>
+  </div></div>
+
+  <div class="wrap">
+    <section class="block" id="parts" aria-labelledby="h-parts">
+      <p class="label">Parts</p>
+      <h2 id="h-parts">The parts it is built from</h2>
+      <p class="intro">Ten plugins for Claude Code, each with a Hermes Agent original. Each one installs on its own.</p>
+      <div class="install">
+        <p>Add the whole catalog once, then install any part by name.</p>
+        <pre><code>claude plugin marketplace add percyhendrux123-prog/axiom-plugins</code></pre>
+      </div>
+      <ul class="legend" aria-label="What the tags mean">
+        <li><span class="tag">skill</span><span>Instructions Claude loads when the task matches. No code runs.</span></li>
+        <li><span class="tag">hook</span><span>A script Claude Code runs on an event, such as before a tool call.</span></li>
+        <li><span class="tag">mod</span><span>JavaScript that runs inside Claude Code.</span></li>
+      </ul>
+    </section>
+
+    <section class="group" id="owner-controls" aria-labelledby="h-owner-controls">
+      <h2 id="h-owner-controls">Owner controls</h2>
+      <div class="grid">
+      <article class="card" id="axiom-gatekeeper">
+        <header>
+          <img src="icons/gatekeeper.png" width="56" height="56" alt="" loading="lazy" decoding="async">
+          <div><h3>Gatekeeper</h3><p class="id">axiom-gatekeeper</p></div>
+        </header>
+        <p class="blurb">Checks outbound messaging calls against your own rules (STOP, consent, quiet hours, no double-texting, approved wording) before they run, and holds or denies the call when a check fails.</p>
+        <ul class="meta"><li class="tag">hook</li><li>Install from GitHub</li></ul>
+        <pre><code>claude plugin install axiom-gatekeeper@deploy-axiom</code></pre>
+        <p class="hermes">Hermes Agent original: <a href="https://github.com/percyhendrux123-prog/hermes-gatekeeper">hermes-gatekeeper</a></p>
+        <p class="links"><a href="https://github.com/percyhendrux123-prog/hermes-gatekeeper/tree/main/claude-plugin/gatekeeper" aria-label="Gatekeeper repository folder">Repository</a><a href="https://github.com/percyhendrux123-prog/hermes-gatekeeper/blob/main/claude-plugin/gatekeeper/README.md" aria-label="Gatekeeper README">README</a></p>
+      </article>
+      <article class="card" id="axiom-standing">
+        <header>
+          <img src="icons/standing.png" width="56" height="56" alt="" loading="lazy" decoding="async">
+          <div><h3>Standing</h3><p class="id">axiom-standing</p></div>
+        </header>
+        <p class="blurb">Keeps a local record of checks that passed or failed, refuses to mark a task done until a check passes, and asks for approval when an agent acts above its level.</p>
+        <ul class="meta"><li class="tag">mod</li><li>Install from GitHub</li></ul>
+        <pre><code>claude plugin install axiom-standing@deploy-axiom</code></pre>
+        <p class="hermes">Hermes Agent original: <a href="https://github.com/percyhendrux123-prog/hermes-standing">hermes-standing</a></p>
+        <p class="links"><a href="https://github.com/percyhendrux123-prog/hermes-standing/tree/main/claude-plugin/standing" aria-label="Standing repository folder">Repository</a><a href="https://github.com/percyhendrux123-prog/hermes-standing/blob/main/claude-plugin/standing/README.md" aria-label="Standing README">README</a></p>
+      </article>
+      <article class="card" id="axiom-tripwire">
+        <header>
+          <img src="icons/tripwire.png" width="56" height="56" alt="" loading="lazy" decoding="async">
+          <div><h3>Tripwire</h3><p class="id">axiom-tripwire</p></div>
+        </header>
+        <p class="blurb">Writes one private log line each time Claude Code refuses a tool call. It only observes: it never blocks, approves or changes a call.</p>
+        <ul class="meta"><li class="tag">hook + mod</li><li>Install from GitHub</li></ul>
+        <pre><code>claude plugin install axiom-tripwire@deploy-axiom</code></pre>
+        <p class="hermes">Hermes Agent original: <a href="https://github.com/percyhendrux123-prog/hermes-tripwire">hermes-tripwire</a></p>
+        <p class="links"><a href="https://github.com/percyhendrux123-prog/hermes-tripwire/tree/main/claude-plugin/tripwire" aria-label="Tripwire repository folder">Repository</a><a href="https://github.com/percyhendrux123-prog/hermes-tripwire/blob/main/claude-plugin/tripwire/README.md" aria-label="Tripwire README">README</a></p>
+      </article>
+      <article class="card" id="axiom-run-receipts">
+        <header>
+          <img src="icons/run-receipts.png" width="56" height="56" alt="" loading="lazy" decoding="async">
+          <div><h3>Run Receipts</h3><p class="id">axiom-run-receipts</p></div>
+        </header>
+        <p class="blurb">Writes one private receipt per session or headless run: when it ran, how many tool calls were seen, how many were reported as failed, and how the run ended.</p>
+        <ul class="meta"><li class="tag">hook</li><li>Install from GitHub</li></ul>
+        <pre><code>claude plugin install axiom-run-receipts@deploy-axiom</code></pre>
+        <p class="hermes">Hermes Agent original: <a href="https://github.com/percyhendrux123-prog/hermes-run-receipts">hermes-run-receipts</a></p>
+        <p class="links"><a href="https://github.com/percyhendrux123-prog/hermes-run-receipts/tree/main/claude-plugin/run-receipts" aria-label="Run Receipts repository folder">Repository</a><a href="https://github.com/percyhendrux123-prog/hermes-run-receipts/blob/main/claude-plugin/run-receipts/README.md" aria-label="Run Receipts README">README</a></p>
+      </article>
+      <article class="card" id="axiom-declines">
+        <header>
+          <img src="icons/declines.png" width="56" height="56" alt="" loading="lazy" decoding="async">
+          <div><h3>Declines</h3><p class="id">axiom-declines</p></div>
+        </header>
+        <p class="blurb">Remembers a permission request you declined and stops Claude Code asking for the same thing again.</p>
+        <ul class="meta"><li class="tag">mod</li><li>Install from GitHub</li></ul>
+        <pre><code>claude plugin install axiom-declines@deploy-axiom</code></pre>
+        <p class="hermes">Hermes Agent original: <a href="https://github.com/percyhendrux123-prog/hermes-declines">hermes-declines</a></p>
+        <p class="links"><a href="https://github.com/percyhendrux123-prog/hermes-declines/tree/main/claude-plugin/declines" aria-label="Declines repository folder">Repository</a><a href="https://github.com/percyhendrux123-prog/hermes-declines/blob/main/claude-plugin/declines/README.md" aria-label="Declines README">README</a></p>
+      </article>
+      </div>
+    </section>
+    <section class="group" id="working-style" aria-labelledby="h-working-style">
+      <h2 id="h-working-style">Working style</h2>
+      <div class="grid">
+      <article class="card" id="axiom-axioma">
+        <header>
+          <img src="icons/axioma.png" width="56" height="56" alt="" loading="lazy" decoding="async">
+          <div><h3>Axioma</h3><p class="id">axiom-axioma</p></div>
+        </header>
+        <p class="blurb">Colors the few phrases in Claude&#x27;s reply that deserve a second look, and shows an advisory card before a send, spend, spin or scrub call. Advice only, never consent.</p>
+        <ul class="meta"><li class="tag">mod</li><li>Install from GitHub</li></ul>
+        <pre><code>claude plugin install axiom-axioma@deploy-axiom</code></pre>
+        <p class="hermes">Hermes Agent original: <a href="https://github.com/percyhendrux123-prog/hermes-axioma">hermes-axioma</a></p>
+        <p class="links"><a href="https://github.com/percyhendrux123-prog/hermes-axioma/tree/main/claude-plugin/axioma" aria-label="Axioma repository folder">Repository</a><a href="https://github.com/percyhendrux123-prog/hermes-axioma/blob/main/claude-plugin/axioma/README.md" aria-label="Axioma README">README</a></p>
+      </article>
+      <article class="card" id="axiom-chiron">
+        <header>
+          <img src="icons/chiron.png" width="56" height="56" alt="" loading="lazy" decoding="async">
+          <div><h3>Chiron</h3><p class="id">axiom-chiron</p></div>
+        </header>
+        <p class="blurb">Reads how much you know about a topic from your own words, with no model call, and adds one short note per turn telling Claude how to talk to you. Off until you turn it on.</p>
+        <ul class="meta"><li class="tag">hook</li><li>Install from GitHub</li></ul>
+        <pre><code>claude plugin install axiom-chiron@deploy-axiom</code></pre>
+        <p class="hermes">Hermes Agent original: <a href="https://github.com/percyhendrux123-prog/hermes-chiron">hermes-chiron</a></p>
+        <p class="links"><a href="https://github.com/percyhendrux123-prog/hermes-chiron/tree/main/claude-plugin/chiron" aria-label="Chiron repository folder">Repository</a><a href="https://github.com/percyhendrux123-prog/hermes-chiron/blob/main/claude-plugin/chiron/README.md" aria-label="Chiron README">README</a></p>
+      </article>
+      <article class="card" id="axiom-agent">
+        <header>
+          <img src="icons/axiom-agent.png" width="56" height="56" alt="" loading="lazy" decoding="async">
+          <div><h3>Axiom Agent</h3><p class="id">axiom-agent</p></div>
+        </header>
+        <p class="blurb">The nine-article Axiom Doctrine as two skills, plus a status report of which articles have an enabled enforcer plugin. It enforces nothing itself.</p>
+        <ul class="meta"><li class="tag">skill</li><li>Install from GitHub</li></ul>
+        <pre><code>claude plugin install axiom-agent@deploy-axiom</code></pre>
+        <p class="hermes">Hermes Agent original: <a href="https://github.com/percyhendrux123-prog/hermes-axiom-agent">hermes-axiom-agent</a></p>
+        <p class="links"><a href="https://github.com/percyhendrux123-prog/hermes-axiom-agent/tree/main/claude-plugin/axiom-agent" aria-label="Axiom Agent repository folder">Repository</a><a href="https://github.com/percyhendrux123-prog/hermes-axiom-agent/blob/main/claude-plugin/axiom-agent/README.md" aria-label="Axiom Agent README">README</a></p>
+      </article>
+      </div>
+    </section>
+    <section class="group" id="fitness" aria-labelledby="h-fitness">
+      <h2 id="h-fitness">Fitness</h2>
+      <div class="grid">
+      <article class="card" id="axiom-coach">
+        <header>
+          <img src="icons/coach.png" width="56" height="56" alt="" loading="lazy" decoding="async">
+          <div><h3>Axiom Coach</h3><p class="id">axiom-coach</p></div>
+        </header>
+        <p class="blurb">Skills for working a coach&#x27;s desk and a self-serve plan through the open coach app&#x27;s own connector, plus the three Lite calculators as written rules.</p>
+        <ul class="meta"><li class="tag">skill</li><li>Directory: in review</li></ul>
+        <pre><code>claude plugin install axiom-coach@deploy-axiom</code></pre>
+        <p class="hermes">Hermes Agent original: <a href="https://github.com/percyhendrux123-prog/hermes-axiom-coach">hermes-axiom-coach</a></p>
+        <p class="links"><a href="https://github.com/percyhendrux123-prog/hermes-axiom-coach/tree/main/claude-plugin/coach" aria-label="Axiom Coach repository folder">Repository</a><a href="https://github.com/percyhendrux123-prog/hermes-axiom-coach/blob/main/claude-plugin/coach/README.md" aria-label="Axiom Coach README">README</a></p>
+      </article>
+      <article class="card" id="axiom-coach-lite">
+        <header>
+          <img src="icons/lite.png" width="56" height="56" alt="" loading="lazy" decoding="async">
+          <div><h3>Axiom Coach Lite Tools</h3><p class="id">axiom-coach-lite</p></div>
+        </header>
+        <p class="blurb">Three local calculators: a training split, daily macro targets (five health questions first), and a cardio calorie estimate. No network, no files.</p>
+        <ul class="meta"><li class="tag">mod</li><li>Install from GitHub</li></ul>
+        <pre><code>claude plugin install axiom-coach-lite@deploy-axiom</code></pre>
+        <p class="hermes">Hermes Agent original: <a href="https://github.com/percyhendrux123-prog/hermes-axiom-coach">hermes-axiom-coach</a></p>
+        <p class="links"><a href="https://github.com/percyhendrux123-prog/hermes-axiom-coach/tree/main/claude-plugin/lite" aria-label="Axiom Coach Lite Tools repository folder">Repository</a><a href="https://github.com/percyhendrux123-prog/hermes-axiom-coach/blob/main/claude-plugin/lite/README.md" aria-label="Axiom Coach Lite Tools README">README</a></p>
+      </article>
+      </div>
+    </section>
+
+    <section class="group" aria-labelledby="h-notes">
+      <h2 id="h-notes">Before you install</h2>
+      <ul class="fine">
+        <li>Hook and mod plugins run code with your permissions. Each README has a “Before you install” section that lists what the plugin reads, writes and calls.</li>
+        <li>Plugins with hooks, scripts or mods are not eligible for Anthropic’s plugin directory until the publisher is verified, so they install from GitHub.</li>
+        <li>Not affiliated with or endorsed by Anthropic.</li>
+      </ul>
+    </section>
+  </div>
+</main>
+<footer><div class="wrap">Deploy Axiom · <a href="https://deployaxiom.com">deployaxiom.com</a> · MIT licensed</div></footer>
+</body>
+</html>

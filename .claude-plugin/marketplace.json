@@ -1,0 +1,203 @@
+{
+  "name": "deploy-axiom",
+  "owner": {
+    "name": "Deploy Axiom",
+    "url": "https://deployaxiom.com"
+  },
+  "metadata": {
+    "description": "Plugins for Claude Code from Deploy Axiom. Each has a Hermes Agent original."
+  },
+  "plugins": [
+    {
+      "name": "axiom-gatekeeper",
+      "displayName": "Gatekeeper",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/percyhendrux123-prog/hermes-gatekeeper.git",
+        "path": "claude-plugin/gatekeeper",
+        "ref": "main"
+      },
+      "description": "Checks outbound messaging tool calls against your own rules before they run, and holds or denies the call when a check fails.",
+      "homepage": "https://github.com/percyhendrux123-prog/hermes-gatekeeper",
+      "license": "MIT",
+      "category": "owner-controls",
+      "tags": [
+        "messaging",
+        "consent",
+        "hooks"
+      ]
+    },
+    {
+      "name": "axiom-standing",
+      "displayName": "Standing",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/percyhendrux123-prog/hermes-standing.git",
+        "path": "claude-plugin/standing",
+        "ref": "main"
+      },
+      "description": "Earned trust for agent workers: independent proof checks, a local record, and level-based approval gates.",
+      "homepage": "https://github.com/percyhendrux123-prog/hermes-standing",
+      "license": "MIT",
+      "category": "owner-controls",
+      "tags": [
+        "trust",
+        "approvals",
+        "mod"
+      ]
+    },
+    {
+      "name": "axiom-tripwire",
+      "displayName": "Tripwire",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/percyhendrux123-prog/hermes-tripwire.git",
+        "path": "claude-plugin/tripwire",
+        "ref": "main"
+      },
+      "description": "Writes one private log line each time Claude Code refuses a tool call. Observes only; never blocks or approves.",
+      "homepage": "https://github.com/percyhendrux123-prog/hermes-tripwire",
+      "license": "MIT",
+      "category": "owner-controls",
+      "tags": [
+        "audit",
+        "refusals",
+        "mod",
+        "hooks"
+      ]
+    },
+    {
+      "name": "axiom-run-receipts",
+      "displayName": "Run Receipts",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/percyhendrux123-prog/hermes-run-receipts.git",
+        "path": "claude-plugin/run-receipts",
+        "ref": "main"
+      },
+      "description": "Writes one private receipt per Claude Code session or headless run: outcome and tool counts, never arguments, results or text.",
+      "homepage": "https://github.com/percyhendrux123-prog/hermes-run-receipts",
+      "license": "MIT",
+      "category": "owner-controls",
+      "tags": [
+        "audit",
+        "receipts",
+        "hooks"
+      ]
+    },
+    {
+      "name": "axiom-declines",
+      "displayName": "Declines",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/percyhendrux123-prog/hermes-declines.git",
+        "path": "claude-plugin/declines",
+        "ref": "main"
+      },
+      "description": "Remembers a permission request you declined and stops Claude Code asking for the same thing again.",
+      "homepage": "https://github.com/percyhendrux123-prog/hermes-declines",
+      "license": "MIT",
+      "category": "owner-controls",
+      "tags": [
+        "permissions",
+        "approvals",
+        "mod"
+      ]
+    },
+    {
+      "name": "axiom-axioma",
+      "displayName": "Axioma",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/percyhendrux123-prog/hermes-axioma.git",
+        "path": "claude-plugin/axioma",
+        "ref": "main"
+      },
+      "description": "Colors the few phrases in Claude's reply that deserve a second look, and shows an advisory card before a send, spend, spin or scrub call. Advice only, never consent.",
+      "homepage": "https://github.com/percyhendrux123-prog/hermes-axioma",
+      "license": "MIT",
+      "category": "working-style",
+      "tags": [
+        "advisory",
+        "signals",
+        "mod"
+      ]
+    },
+    {
+      "name": "axiom-chiron",
+      "displayName": "Chiron",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/percyhendrux123-prog/hermes-chiron.git",
+        "path": "claude-plugin/chiron",
+        "ref": "main"
+      },
+      "description": "Reads your level on each topic from your own words, with no model call, and tells Claude how to talk to you.",
+      "homepage": "https://github.com/percyhendrux123-prog/hermes-chiron",
+      "license": "MIT",
+      "category": "working-style",
+      "tags": [
+        "advisor",
+        "beginners",
+        "hooks"
+      ]
+    },
+    {
+      "name": "axiom-agent",
+      "displayName": "Axiom Agent",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/percyhendrux123-prog/hermes-axiom-agent.git",
+        "path": "claude-plugin/axiom-agent",
+        "ref": "main"
+      },
+      "description": "The nine-article Axiom Doctrine as skills, with a status report of which articles have an enabled enforcer plugin. Enforces nothing itself.",
+      "homepage": "https://github.com/percyhendrux123-prog/hermes-axiom-agent",
+      "license": "MIT",
+      "category": "working-style",
+      "tags": [
+        "doctrine",
+        "rules",
+        "skills"
+      ]
+    },
+    {
+      "name": "axiom-coach",
+      "displayName": "Axiom Coach",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/percyhendrux123-prog/hermes-axiom-coach.git",
+        "path": "claude-plugin/coach",
+        "ref": "main"
+      },
+      "description": "Skills for the open coach app's connector (coach desk, self-serve plan, connect, deploy) and the Lite calculators as written rules. Skills only.",
+      "homepage": "https://github.com/percyhendrux123-prog/hermes-axiom-coach",
+      "license": "MIT",
+      "category": "fitness",
+      "tags": [
+        "coaching",
+        "fitness",
+        "skills"
+      ]
+    },
+    {
+      "name": "axiom-coach-lite",
+      "displayName": "Axiom Coach Lite Tools",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/percyhendrux123-prog/hermes-axiom-coach.git",
+        "path": "claude-plugin/lite",
+        "ref": "main"
+      },
+      "description": "The three Lite calculators (split, macros, cardio) as local tools for Claude Code, run as a mod. No network, no files.",
+      "homepage": "https://github.com/percyhendrux123-prog/hermes-axiom-coach",
+      "license": "MIT",
+      "category": "fitness",
+      "tags": [
+        "fitness",
+        "calculators",
+        "mod"
+      ]
+    }
+  ]
+}
