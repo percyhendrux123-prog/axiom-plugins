@@ -52,22 +52,22 @@ pre.cad>div{height:1.2727em;overflow:hidden;white-space:pre}
 .hero-cad{--cfs:min(22px,calc((100vw - 2 * var(--gut)) / 26.4));width:100%}
 @media (min-width:960px){
   .hero-grid{grid-template-columns:auto minmax(0,1fr);gap:clamp(36px,5vw,64px)}
-  .hero-cad{--cfs:clamp(15px,calc((100vw - 2 * var(--gut) - 64px - 360px) / 26.4),22px);width:auto}
+  .hero-cad{--cfs:clamp(13px,calc((100vw - 2 * var(--gut) - 64px - 560px) / 26.4),17px);width:auto}
 }
-.state{display:inline-block;font:500 .75rem/1 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--stone);border:1px solid var(--rule2);border-left:3px solid var(--brassd);padding:8px 12px;margin:0 0 26px}
-h1.chrome{font:600 clamp(1rem,1.45vw,1.25rem)/1.35 var(--serif);letter-spacing:.14em;text-transform:uppercase;margin:0 0 clamp(28px,4vw,44px);
+.state{display:inline-block;font:500 .75rem/1.5 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--stone);border:1px solid var(--rule2);border-left:3px solid var(--brassd);padding:8px 12px;margin:0 0 22px}
+h1.chrome{font:600 clamp(1rem,1.45vw,1.25rem)/1.35 var(--serif);letter-spacing:.14em;text-transform:uppercase;margin:0 0 clamp(20px,2.6vw,30px);
   color:#8a8d93;
   background-image:linear-gradient(100deg,#42454a 0%,#8e9298 12%,#575a60 25%,#c9ccd1 37%,#42454a 50%,#8e9298 62%,#575a60 75%,#c9ccd1 87%,#42454a 100%);
   background-size:200% 100%;background-position:var(--chrome,35%) 0;
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .axiom-label{margin-bottom:12px}
-.axiom{font:500 clamp(1.75rem,3.1vw,2.55rem)/1.2 var(--serif);letter-spacing:.015em;color:var(--stone);max-width:17em;text-wrap:balance}
-.cmd{font:400 clamp(1.02rem,1.7vw,1.3rem)/1.4 var(--mono);color:var(--stone);margin:clamp(26px,3.4vw,40px) 0 0;white-space:nowrap}
+.axiom{font:500 clamp(1.6rem,2.7vw,2.2rem)/1.2 var(--serif);letter-spacing:.015em;color:var(--stone);max-width:17em;text-wrap:balance}
+.cmd{font:400 clamp(1.02rem,1.7vw,1.3rem)/1.4 var(--mono);color:var(--stone);margin:clamp(20px,2.4vw,28px) 0 0;white-space:nowrap}
 .prompt{color:#6d6a63}
 .cursor{display:inline-block;width:.6em;height:1.1em;background:var(--stone);vertical-align:-.2em;margin-left:1px}
 .cursor.off{opacity:0}
-.lede{font-size:clamp(1.05rem,1.8vw,1.2rem);line-height:1.5;color:var(--mid);max-width:34em;margin:clamp(26px,3.4vw,40px) 0 0}
-.actions{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;margin-top:28px}
+.lede{font-size:clamp(1.05rem,1.8vw,1.2rem);line-height:1.5;color:var(--mid);max-width:34em;margin:clamp(16px,2vw,22px) 0 0}
+.actions{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;margin-top:22px}
 .btn{display:inline-flex;align-items:center;min-height:48px;padding:0 22px;background:var(--stone);color:var(--ink);font:500 1rem/1 var(--sans);text-decoration:none;border:1px solid var(--stone)}
 .btn:hover{background:#fff}
 .btn:focus-visible{outline-offset:4px}
@@ -94,6 +94,24 @@ h2{font:700 clamp(1.5rem,3vw,2.2rem)/1.15 var(--serif);letter-spacing:.06em}
 .office-svg{display:block;width:100%;height:auto;max-width:1000px;margin:0 auto}
 .office-wide{display:none}
 @media (min-width:900px){.office-wide{display:block}.office-narrow{display:none}}
+/* ---- launch additions: hero install line, the real rule, the featured Office piece */
+.install{margin-top:clamp(18px,2.2vw,24px);max-width:36rem}
+.install .label{margin-bottom:10px}
+.install .cmdbox pre{font-size:.8125rem}
+.realrule{margin-top:28px;max-width:46em;color:var(--mid);font-size:.9375rem;line-height:1.6;border-left:3px solid var(--brassd);padding-left:16px}
+.realrule .rl{color:var(--brass)}
+.realrule a{white-space:nowrap}
+.piece.feature{grid-column:1/-1}
+@media (min-width:860px){
+  .piece.feature{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:36px;row-gap:14px;align-items:start;padding:30px 28px 22px}
+  .piece.feature>*{grid-column:2;min-width:0}
+  .piece.feature>.piece-top{grid-column:1;grid-row:1/span 7}
+  .piece.feature>.inkrule{grid-column:1/-1}
+  .piece.feature .blurb{max-width:44em;flex:none}
+  .piece.feature .cmdbox{max-width:34rem}
+  .piece.feature .links{margin-top:0}
+}
+
 @media (max-width:520px){.office-fig{margin-left:-8px;margin-right:-8px}}
 .office-svg .wall{fill:none;stroke:#42444a;stroke-width:1.1;stroke-linecap:square}
 .office-svg .wall2{stroke:#2e3034}

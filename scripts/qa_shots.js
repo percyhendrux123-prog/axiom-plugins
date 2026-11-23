@@ -1,12 +1,12 @@
 /* QA screenshots with Playwright + the installed Chrome. Not part of the page build.
    NODE_PATH=<a node_modules that has playwright> node scripts/qa_shots.js
-   Writes review/v2/*.png (review/ is git-ignored). */
+   Writes review/$QA_OUT (default v3)/*.png (review/ is git-ignored). */
 const { chromium } = require("playwright");
 const path = require("path");
 const fs = require("fs");
 const ROOT = path.resolve(__dirname, "..");
 const URL = process.env.QA_URL || "http://127.0.0.1:8765/index.html";
-const OUT = path.join(ROOT, "review", "v2");
+const OUT = path.join(ROOT, "review", process.env.QA_OUT || "v3");
 fs.mkdirSync(OUT, { recursive: true });
 const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 

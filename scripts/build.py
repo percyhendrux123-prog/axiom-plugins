@@ -27,13 +27,15 @@ OFFICE_H1 = "Axiom Office for Claude"
 OFFICE_LEDE = ("One orchestrator, a team of specialists you can see but not talk past, "
                "and your rules enforced as code.")
 OFFICE_LINES = [
-    "Discovery decides the team.",
-    "One front door: you talk only to the orchestrator, which alone holds sensitive data.",
-    "Every send, refusal and run leaves a receipt.",
+    "Discovery: an owner interview that writes the rulebook and the settings; you apply them yourself.",
+    "One front door: you talk only to the orchestrator. Specialists cannot send outside or touch the data tier you list.",
+    "A pane shows every agent: state, task, time, context use, and a mark when you are wanted.",
 ]
-OFFICE_STATUS = "In build. Not released yet."
+OFFICE_STATUS = "Version 0.1 \u00b7 free and open source \u00b7 runs in Claude Code and the Claude desktop app"
+OFFICE_INSTALL = f"claude plugin install axiom-office@{DATA['marketplace']}"
+OFFICE_CTA_NOTE = "Deploy Axiom runs discovery, writes your rules and sets up the team."
 CTA_TEXT = "Talk to Deploy Axiom"
-PARTS_INTRO = ("Ten plugins for Claude Code, each with a Hermes Agent original. "
+PARTS_INTRO = ("Eleven plugins for Claude Code: the Axiom Office, and ten that each have a Hermes Agent original. "
                "Each one installs on its own.")
 TAG_LEGEND = [
     ("skill", "Instructions Claude loads when the task matches. No code runs."),
@@ -41,8 +43,11 @@ TAG_LEGEND = [
     ("mod", "JavaScript that runs inside Claude Code."),
 ]
 NOTES = [
-    "Hook and mod plugins run code with your permissions. Each README has a \u201cBefore you install\u201d "
-    "section that lists what the plugin reads, writes and calls.",
+    "The Axiom Office is version 0.1, built against Claude Code 2.1.330 and proven live in the terminal and in the "
+    "Code tab of the Claude Desktop app. VS Code is not proven live. Agent teams are an experimental Claude Code "
+    "feature; the pane and the rules also work for plain subagents.",
+    "Hook and mod plugins run code with your permissions. Each README says what the plugin "
+    "reads, writes and calls.",
     "Plugins with hooks, scripts or mods are not eligible for Anthropic\u2019s plugin directory until the "
     "publisher is verified, so they install from GitHub.",
     "Not affiliated with or endorsed by Anthropic.",
@@ -88,7 +93,7 @@ def build_marketplace():
     doc = {
         "name": MP,
         "owner": {"name": "Deploy Axiom", "url": SITE},
-        "metadata": {"description": "Plugins for Claude Code from Deploy Axiom. Each has a Hermes Agent original."},
+        "metadata": {"description": "Plugins for Claude Code from Deploy Axiom: the Axiom Office and ten plugins that each have a Hermes Agent original."},
         "plugins": entries,
     }
     (ROOT / ".claude-plugin" / "marketplace.json").write_text(json.dumps(doc, indent=2) + "\n")
@@ -102,7 +107,7 @@ def build_page():
     from page import build_page as render
     ctx = {
         "data": DATA, "plugins": PLUGINS, "site": SITE, "base_url": BASE_URL,
-        "h1": OFFICE_H1, "lede": OFFICE_LEDE, "lines": OFFICE_LINES, "status_line": OFFICE_STATUS,
+        "h1": OFFICE_H1, "lede": OFFICE_LEDE, "lines": OFFICE_LINES, "status_line": OFFICE_STATUS, "install": OFFICE_INSTALL, "cta_note": OFFICE_CTA_NOTE,
         "cta": CTA_TEXT, "parts_intro": PARTS_INTRO, "tag_legend": TAG_LEGEND, "notes": NOTES,
         "status": status, "install_cmd": install_cmd, "repo_url": repo_url,
         "tree_url": tree_url, "readme_url": readme_url,
@@ -114,11 +119,12 @@ def build_page():
 def build_readme():
     L = []
     L.append("# Deploy Axiom plugins for Claude Code\n")
-    L.append(f"**{OFFICE_H1}** ({OFFICE_STATUS.rstrip('.')}.) {OFFICE_LEDE}\n")
+    L.append(f"**{OFFICE_H1}**: {OFFICE_LEDE}\n\n{OFFICE_STATUS}.\n")
     for x in OFFICE_LINES:
         L.append(f"- {x}")
-    L.append(f"\n[{CTA_TEXT}]({SITE})\n")
-    L.append("## The parts it is built from\n")
+    L.append(f"\nInstall the Office, after adding the catalog below:\n\n```\n{OFFICE_INSTALL}\n```\n")
+    L.append(f"[{CTA_TEXT}]({SITE}). {OFFICE_CTA_NOTE}\n")
+    L.append("## The plugins\n")
     L.append(PARTS_INTRO + "\n")
     L.append("Add the whole catalog once, then install any part by name:\n")
     L.append(f"```\nclaude plugin marketplace add {DATA['catalog_repo']}\nclaude plugin install axiom-gatekeeper@{MP}\n```\n")
@@ -131,7 +137,8 @@ def build_readme():
             L.append(p["blurb"] + "\n")
             L.append(f"- Mechanism: {p['mechanism']}")
             L.append(f"- {status(p)}")
-            L.append(f"- Hermes Agent original: [{p['repo']}]({repo_url(p)})")
+            L.append(f"- Hermes Agent original: [{p['repo']}]({repo_url(p)})" if p.get("original", True)
+                     else f"- Source: [{p['repo']}]({repo_url(p)}) (MIT)")
             L.append(f"- [Repository folder]({tree_url(p)}) \u00b7 [README]({readme_url(p)})\n")
             L.append(f"```\n{install_cmd(n)}\n```\n")
     L.append("## Before you install\n")

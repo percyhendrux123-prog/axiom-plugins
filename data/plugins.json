@@ -2,6 +2,7 @@
   "marketplace": "deploy-axiom",
   "catalog_repo": "percyhendrux123-prog/axiom-plugins",
   "groups": [
+    {"id": "the-office", "title": "The Office", "plugins": ["axiom-office"]},
     {"id": "owner-controls", "title": "Owner controls", "plugins": ["axiom-gatekeeper", "axiom-standing", "axiom-tripwire", "axiom-run-receipts", "axiom-declines"]},
     {"id": "working-style", "title": "Working style", "plugins": ["axiom-axioma", "axiom-chiron", "axiom-agent"]},
     {"id": "fitness", "title": "Fitness", "plugins": ["axiom-coach", "axiom-coach-lite"]}
@@ -86,6 +87,14 @@
       "rule": "Five health questions first, any yes returns no numbers.",
       "entry_description": "The three Lite calculators (split, macros, cardio) as local tools for Claude Code, run as a mod. No network, no files.",
       "tags": ["fitness", "calculators", "mod"]
+    },
+    "axiom-office": {
+      "display": "Axiom Office", "repo": "axiom-office-claude", "folder": "office", "icon": "axiom-office.png",
+      "mechanism": "mod", "directory": false, "original": false, "feature": true,
+      "blurb": "A pane that shows the orchestrator and every subagent or teammate (state, task, time, context, and when you are wanted), plus one front door: you talk only to the orchestrator, and specialists cannot send outside or read protected data. The front door only ever refuses; it never allows a call.",
+      "rule": "You talk to one agent. Specialists cannot send outside.",
+      "entry_description": "A pane that shows the orchestrator and every subagent or teammate (state, task, time, context, and when you are wanted), plus one front door: you talk only to the orchestrator, and specialists cannot send outside or read protected data.",
+      "tags": ["agents", "teams", "guardrails", "mod"]
     }
   }
 }

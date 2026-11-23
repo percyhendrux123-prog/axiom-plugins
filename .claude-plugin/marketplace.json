@@ -5,7 +5,7 @@
     "url": "https://deployaxiom.com"
   },
   "metadata": {
-    "description": "Plugins for Claude Code from Deploy Axiom. Each has a Hermes Agent original."
+    "description": "Plugins for Claude Code from Deploy Axiom: the Axiom Office and ten plugins that each have a Hermes Agent original."
   },
   "plugins": [
     {
@@ -196,6 +196,26 @@
       "tags": [
         "fitness",
         "calculators",
+        "mod"
+      ]
+    },
+    {
+      "name": "axiom-office",
+      "displayName": "Axiom Office",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/percyhendrux123-prog/axiom-office-claude.git",
+        "path": "claude-plugin/office",
+        "ref": "main"
+      },
+      "description": "A pane that shows the orchestrator and every subagent or teammate (state, task, time, context, and when you are wanted), plus one front door: you talk only to the orchestrator, and specialists cannot send outside or read protected data.",
+      "homepage": "https://github.com/percyhendrux123-prog/axiom-office-claude",
+      "license": "MIT",
+      "category": "the-office",
+      "tags": [
+        "agents",
+        "teams",
+        "guardrails",
         "mod"
       ]
     }

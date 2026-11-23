@@ -24,13 +24,14 @@ LAYOUTS = {
 }
 ROWS = 22
 LABELS = {
-    "wide": dict(held="held: specialists don't send", ask="approve 1 send?", approved="approved", sent="sent"),
-    "narrow": dict(held="held", ask="approve?", approved="approved", sent="sent"),
+    "wide": dict(held="held: specialists don't send", ask="approve 1 send?", approved="approved", sent="sent",
+                 gate="permission prompt"),
+    "narrow": dict(held="held", ask="approve?", approved="approved", sent="sent", gate="prompt"),
 }
 DIAGRAM_DESC = ("The owner connects only to the orchestrator, through the front door. The orchestrator "
                 "connects to five specialists: code review, builder, client desk, adversary and marketing. "
                 "The specialists have no door to the outside. One gate, on the orchestrator's outbound line, "
-                "is where a send leaves.")
+                "is where a send leaves, through Claude Code's permission prompt.")
 
 
 def _sigil(cx, cy, mask=IDLE_MASK):
@@ -132,7 +133,7 @@ def office_svg(kind):
 
     # fixed labels and the places the demo writes to
     out.append(f'<text class="lbl dim" x="{cxo - 12:.1f}" y="{cy(4) + 4.2:.1f}" text-anchor="end">front door</text>')
-    out.append(f'<text class="lbl dim" x="{cx(fr) - 14:.1f}" y="{cy(12) + 4.2:.1f}" text-anchor="end">gatekeeper</text>')
+    out.append(f'<text class="lbl dim" x="{cx(fr) - 14:.1f}" y="{cy(12) + 4.2:.1f}" text-anchor="end">{L["gate"]}</text>')
     out.append(f'<text class="lbl brass" data-label="ask" x="{cxo + 12:.1f}" y="{cy(4) + 4.2:.1f}">{escape(L["ask"])}</text>')
     out.append(f'<text class="lbl stone" data-label="approved" x="{cxo + 12:.1f}" y="{cy(4) + 4.2:.1f}">{escape(L["approved"])}</text>')
     out.append(f'<text class="lbl red" data-label="held" x="{cx(fr) - 8:.1f}" y="{cy(10) + 4.2:.1f}" text-anchor="end">{escape(L["held"])}</text>')
@@ -168,14 +169,14 @@ DEMO = {
 }
 CONSOLE = [  # t, class, text
     (0.0, "dim", "demo run \u00b7 simulated \u00b7 nothing is sent"),
-    (0.5, "", "discovery: deciding the team"),
+    (0.5, "", "example team assembled"),
 ] + [(t, "dim", f"  + {n}") for t, n in zip(DEMO["roster"], ROSTER)] + [
     (3.0, "", "orchestrator: work goes out to the team"),
     (5.0, "", "client-desk: tries to send a message"),
-    (5.6, "red", "gatekeeper: held \u00b7 specialists don't send"),
+    (5.6, "red", "front door: held \u00b7 specialists don't send"),
     (7.0, "brass", "orchestrator: asks owner to approve 1 send"),
     (9.0, "", "owner: approved"),
-    (9.8, "", "orchestrator: 1 send leaves via the gate"),
+    (9.8, "", "orchestrator: 1 approved send leaves"),
     (10.9, "", "run-receipts: receipt written"),
 ]
 LEDGER = [  # t, ts, agent, kind, outcome, via
@@ -209,7 +210,7 @@ def piece(ctx, name, n):
     P = ctx["plugins"][name]
     d = escape(P["display"])
     icon = P["icon"]
-    return f"""        <article class="piece" id="{escape(name)}" data-piece="{escape(name)}">
+    return f"""        <article class="piece{" feature" if P.get("feature") else ""}" id="{escape(name)}" data-piece="{escape(name)}">
           <span class="inkrule" aria-hidden="true"></span>
           <div class="piece-top">
             <div class="mark" aria-hidden="true"><img src="icons/1bit/{escape(icon)}" width="128" height="128" alt="" loading="lazy" decoding="async"><canvas width="64" height="64"></canvas></div>
@@ -219,7 +220,7 @@ def piece(ctx, name, n):
           <p class="rule"><span class="rl">Inks in</span>{escape(P['rule'])}</p>
           <p class="blurb">{escape(P['blurb'])}</p>
           <div class="cmdbox"><pre><code>{escape(ctx['install_cmd'](name))}</code></pre><button class="copy" type="button" hidden aria-label="Copy the install command for {d}">Copy</button></div>
-          <p class="hermes">Hermes Agent original: <a href="{escape(ctx['repo_url'](P))}">{escape(P['repo'])}</a></p>
+          <p class="hermes">{"Hermes Agent original" if P.get("original", True) else "Source"}: <a href="{escape(ctx['repo_url'](P))}">{escape(P['repo'])}</a></p>
           <p class="links"><a href="{escape(ctx['tree_url'](P))}" aria-label="{d} repository folder">Repository</a><a href="{escape(ctx['readme_url'](P))}" aria-label="{d} README">README</a></p>
         </article>"""
 
@@ -227,7 +228,9 @@ def piece(ctx, name, n):
 def build_page(ctx):
     D = ctx["data"]
     SITE = ctx["site"]
-    desc = (f"{ctx['h1']}: {ctx['lede']} In build. Built from ten Claude Code plugins that install from GitHub.")
+    desc = (f"{ctx['h1']}: {ctx['lede']} Version 0.1, free and open source (MIT). "
+            f"Eleven plugins for Claude Code that install from GitHub.")
+    og_alt = "The Agent With The Axiom Tattoo: a braille caduceus and the Deploy Axiom mark. Axiom Office for Claude, 11 plugins."
     n = 0
     sheets = []
     for g in D["groups"]:
@@ -238,7 +241,7 @@ def build_page(ctx):
         count = len(g["plugins"])
         sheets.append(f"""      <section class="sheet" id="{g['id']}" aria-labelledby="h-{g['id']}">
         <span class="crop tl" aria-hidden="true"></span><span class="crop tr" aria-hidden="true"></span><span class="crop bl" aria-hidden="true"></span><span class="crop br" aria-hidden="true"></span>
-        <header class="sheet-head"><h3 id="h-{g['id']}">{escape(g['title'])}</h3><p class="count">{count} pieces</p></header>
+        <header class="sheet-head"><h3 id="h-{g['id']}">{escape(g['title'])}</h3><p class="count">{count} {"piece" if count == 1 else "pieces"}</p></header>
         <div class="pieces">
 {chr(10).join(pcs)}
         </div>
@@ -262,8 +265,13 @@ def build_page(ctx):
 <meta property="og:image" content="{ctx['base_url']}og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Axiom Office for Claude, in build, with the Deploy Axiom mark.">
+<meta property="og:image:alt" content="{escape(og_alt)}">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{escape(ctx['h1'])} \u00b7 Deploy Axiom">
+<meta name="twitter:description" content="{escape(desc)}">
+<meta name="twitter:image" content="{ctx['base_url']}og.png">
+<meta name="twitter:image:alt" content="{escape(og_alt)}">
+<link rel="canonical" href="{ctx['base_url']}">
 <link rel="icon" type="image/svg+xml" href="mark.svg">
 <link rel="preload" href="fonts/cinzel-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -284,9 +292,14 @@ def build_page(ctx):
         <p class="axiom">Nothing sends, spends, or spins without the one who holds the gate.</p>
         <p class="cmd" aria-label="python deploy.py axiom"><span class="prompt" aria-hidden="true">$</span> <span class="typed" aria-hidden="true">python deploy.py axiom</span><span class="cursor" aria-hidden="true"></span></p>
         <p class="lede">{escape(ctx['lede'])}</p>
+        <div class="install">
+          <p class="label">Install the Office</p>
+          <div class="cmdbox"><pre><code>claude plugin marketplace add {escape(D['catalog_repo'])}
+{escape(ctx['install'])}</code></pre><button class="copy" type="button" hidden aria-label="Copy the install commands for the Axiom Office">Copy</button></div>
+        </div>
         <div class="actions">
           <a class="btn" href="{SITE}">{escape(ctx['cta'])}</a>
-          <p class="note">The Office is in build. The parts below are released.</p>
+          <p class="note">{escape(ctx['cta_note'])}</p>
         </div>
       </div>
     </div>
@@ -299,7 +312,7 @@ def build_page(ctx):
       <div class="controls">
         <button class="run" type="button" id="run" disabled aria-describedby="run-note"><span class="run-t">Run the demo</span></button>
         <p class="chip"><span class="chip-dot" aria-hidden="true"></span>Demo run \u00b7 simulated</p>
-        <p class="note" id="run-note">An example team and an example run. Discovery decides the real team. Nothing is sent.</p>
+        <p class="note" id="run-note">An example team and an example run. Nothing is sent.</p>
       </div>
       <figure class="office-fig">
         {office_svg('wide')}
@@ -311,9 +324,10 @@ def build_page(ctx):
           <div class="term-head"><span class="term-t">axiom office \u00b7 demo</span><span class="term-s"><span class="spin" aria-hidden="true"></span><span class="term-state">ready</span></span></div>
           <div class="console-wrap">{console_html()}<p class="hint" aria-hidden="true">Press Run the demo. About twelve seconds, simulated.</p></div>
           {ledger_html()}
-          <p class="term-note">Simulated rows, shaped like Tripwire and Run Receipts lines. The words are from their READMEs. Nothing here is a real send.</p>
+          <p class="term-note">Simulated rows, shaped like Tripwire and Run Receipts lines (those are separate plugins; the Office itself writes nothing to disk). The words are from their READMEs. Nothing here is a real send.</p>
         </div>
       </div>
+      <p class="realrule"><span class="rl">The rule is real</span>Specialists cannot send outside. A subagent or teammate is refused send-like tools, and shell lines that send. Only the orchestrator can, and its sends still go through Claude Code\u2019s normal permission prompt. It is not a sandbox: the shell check cannot follow a script or code in another language. <a href="{ctx['readme_url'](ctx['plugins']['axiom-office'])}">Office README</a></p>
       <ul class="three">
 {three}
       </ul>
@@ -323,7 +337,7 @@ def build_page(ctx):
 
   <section class="parts" id="parts" aria-labelledby="h-parts">
     <div class="wrap">
-      <p class="label">Parts</p>
+      <p class="label">Plugins</p>
       <h2 id="h-parts">The flash sheet</h2>
       <p class="intro">Rules, inked in, not instructed. {escape(ctx['parts_intro'])}</p>
       <div class="stencil">

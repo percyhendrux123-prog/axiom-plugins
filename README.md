@@ -1,16 +1,24 @@
 # Deploy Axiom plugins for Claude Code
 
-**Axiom Office for Claude** (In build. Not released yet.) One orchestrator, a team of specialists you can see but not talk past, and your rules enforced as code.
+**Axiom Office for Claude**: One orchestrator, a team of specialists you can see but not talk past, and your rules enforced as code.
 
-- Discovery decides the team.
-- One front door: you talk only to the orchestrator, which alone holds sensitive data.
-- Every send, refusal and run leaves a receipt.
+Version 0.1 · free and open source · runs in Claude Code and the Claude desktop app.
 
-[Talk to Deploy Axiom](https://deployaxiom.com)
+- Discovery: an owner interview that writes the rulebook and the settings; you apply them yourself.
+- One front door: you talk only to the orchestrator. Specialists cannot send outside or touch the data tier you list.
+- A pane shows every agent: state, task, time, context use, and a mark when you are wanted.
 
-## The parts it is built from
+Install the Office, after adding the catalog below:
 
-Ten plugins for Claude Code, each with a Hermes Agent original. Each one installs on its own.
+```
+claude plugin install axiom-office@deploy-axiom
+```
+
+[Talk to Deploy Axiom](https://deployaxiom.com). Deploy Axiom runs discovery, writes your rules and sets up the team.
+
+## The plugins
+
+Eleven plugins for Claude Code: the Axiom Office, and ten that each have a Hermes Agent original. Each one installs on its own.
 
 Add the whole catalog once, then install any part by name:
 
@@ -20,6 +28,21 @@ claude plugin install axiom-gatekeeper@deploy-axiom
 ```
 
 Tags: **skill**: Instructions Claude loads when the task matches. No code runs. **hook**: A script Claude Code runs on an event, such as before a tool call. **mod**: JavaScript that runs inside Claude Code.
+
+## The Office
+
+### Axiom Office (`axiom-office`)
+
+A pane that shows the orchestrator and every subagent or teammate (state, task, time, context, and when you are wanted), plus one front door: you talk only to the orchestrator, and specialists cannot send outside or read protected data. The front door only ever refuses; it never allows a call.
+
+- Mechanism: mod
+- Install from GitHub
+- Source: [axiom-office-claude](https://github.com/percyhendrux123-prog/axiom-office-claude) (MIT)
+- [Repository folder](https://github.com/percyhendrux123-prog/axiom-office-claude/tree/main/claude-plugin/office) · [README](https://github.com/percyhendrux123-prog/axiom-office-claude/blob/main/claude-plugin/office/README.md)
+
+```
+claude plugin install axiom-office@deploy-axiom
+```
 
 ## Owner controls
 
@@ -159,7 +182,8 @@ claude plugin install axiom-coach-lite@deploy-axiom
 
 ## Before you install
 
-- Hook and mod plugins run code with your permissions. Each README has a “Before you install” section that lists what the plugin reads, writes and calls.
+- The Axiom Office is version 0.1, built against Claude Code 2.1.330 and proven live in the terminal and in the Code tab of the Claude Desktop app. VS Code is not proven live. Agent teams are an experimental Claude Code feature; the pane and the rules also work for plain subagents.
+- Hook and mod plugins run code with your permissions. Each README says what the plugin reads, writes and calls.
 - Plugins with hooks, scripts or mods are not eligible for Anthropic’s plugin directory until the publisher is verified, so they install from GitHub.
 - Not affiliated with or endorsed by Anthropic.
 
