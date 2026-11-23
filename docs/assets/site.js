@@ -126,7 +126,7 @@
   var SPIN_CH = "\u280b\u2819\u2839\u2838\u283c\u2834\u2826\u2827\u2807\u280f";
   var IDLE_MASK = 0x36;
   var NS = "http://www.w3.org/2000/svg";
-  var SPOKES = ["code-review", "builder", "client-desk", "adversary", "marketing"];
+  var SPOKES = ["code-review", "builder", "client-desk", "tester", "marketing"];
   var LIS = $$(".console li"), TRS = $$(".ledger tbody tr"), termEl = $("#term");
 
   function buildSvg(svg) {
@@ -230,7 +230,7 @@
       e.buf.length = 0;
     }
   }
-  var AMB = ["owner", "code-review", "client-desk", "builder", "adversary", "marketing", "out"].map(function (id, k) {
+  var AMB = ["owner", "code-review", "client-desk", "builder", "tester", "marketing", "out"].map(function (id, k) {
     return { e: id, P: 6.2 + k * 0.85, ph: k * 1.7, rev: k % 2 === 1 };
   });
   var demoOn = false;

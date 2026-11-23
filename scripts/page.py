@@ -16,7 +16,7 @@ SPECS = [  # id, label, side, row of the box's first line
     ("code-review", "CODE REVIEW", "L", 7),
     ("builder", "BUILDER", "L", 13),
     ("client-desk", "CLIENT DESK", "R", 7),
-    ("adversary", "ADVERSARY", "R", 13),
+    ("tester", "TESTER", "R", 13),
 ]
 LAYOUTS = {
     "wide": dict(margin=6, pad=3, sw=22, sp=9, ow=26),
@@ -29,7 +29,7 @@ LABELS = {
     "narrow": dict(held="held", ask="approve?", approved="approved", sent="sent", gate="prompt"),
 }
 DIAGRAM_DESC = ("The owner connects only to the orchestrator, through the front door. The orchestrator "
-                "connects to five specialists: code review, builder, client desk, adversary and marketing. "
+                "connects to five specialists: code review, builder, client desk, tester and marketing. "
                 "The specialists have no door to the outside. One gate, on the orchestrator's outbound line, "
                 "is where a send leaves, through Claude Code's permission prompt.")
 
@@ -154,7 +154,7 @@ def office_svg(kind):
 
 
 # ------------------------------------------------------------------ the demo script
-ROSTER = ["code-review", "builder", "client-desk", "adversary", "marketing"]
+ROSTER = ["code-review", "builder", "client-desk", "tester", "marketing"]
 DEMO = {
     "dur": 12.0, "tail": 4.0, "spin": [0.0, 11.1],
     "roster": [1.0, 1.35, 1.7, 2.05, 2.4],
